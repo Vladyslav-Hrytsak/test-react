@@ -1,5 +1,6 @@
 import axios from "axios";
-import type {IMovies} from "../models/IMoviesResponceModel.ts";
+import type {IMovie} from "../models/IMoviesResponceModel.ts";
+import type {IGenre} from "../models/IGenre.ts";
 
 
 const axiosInstance = axios.create({
@@ -10,13 +11,20 @@ const axiosInstance = axios.create({
 });
 
 
-export const getMovies = async (endpoint:string): Promise<IMovies[]> => {
+export const getMovies = async (endpoint:string): Promise<IMovie[]> => {
     const {data} = await axiosInstance.get(endpoint)
     return data.results
 }
 
+// export const getMoviesByPage = async (endpoint:string): Promise<IMovie[]> => {
+//     const {data} = await axiosInstance.get(endpoint)
+//     return data.results
+// }
 
-export const getGenres = async (endpoint:string): Promise<IMovies[]> => {
-    const {data} = await axiosInstance.get(endpoint)
-    return data.results
+
+export const getGenres = async (endpoint: string): Promise<IGenre[]> => {
+    const { data } = await axiosInstance.get<{ genres: IGenre[] }>(endpoint)
+    return data.genres
 }
+
+

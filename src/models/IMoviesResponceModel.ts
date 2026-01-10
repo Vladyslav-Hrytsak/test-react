@@ -1,11 +1,11 @@
 export interface IMoviesResponceModel {
     page: number
-    results: IMovies[]
+    results: IMovie[]
     total_pages: number
     total_results: number
 }
 
-export interface IMovies {
+export interface IMovie {
     adult: boolean
     backdrop_path: string
     genre_ids: number[]

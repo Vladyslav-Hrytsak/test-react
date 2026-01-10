@@ -1,0 +1,6 @@
+.card {
+    width: 250px;
+    flex-shrink: 0;
+    text-decoration: none;
+    height: 770px;
+}
