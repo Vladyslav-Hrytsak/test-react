@@ -13,7 +13,7 @@ const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w300";
 const MovieCardComponent:FC<MovieCardComponentProps> = ({ movie }: MovieCardComponentProps) => {
     return (
 
-        <Link to={'movie:id'} className={'card'} >
+        <Link to={`/movies/${movie.id}`} className={'card'} >
                 <div style={{ border: "1px solid #ddd", padding: "10px", width: "250px", height: "100%",
                     display: "flex",
                     flexDirection: "column" }}>

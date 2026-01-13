@@ -1,13 +1,19 @@
-import type { IGenre } from "../../models/IGenre.ts";
-import type { FC } from "react";
+import type {IGenre} from "../../models/IGenre";
+import type {FC} from "react";
 
 interface GenresListComponentProps {
-    genre: IGenre;
+    genre: IGenre,
+    onSelectGenre: ((id: number) => void) | undefined
 }
 
-const GenresListComponent: FC<GenresListComponentProps> = ({ genre }) => {
+const GenresListComponent: FC<GenresListComponentProps> = ({genre, onSelectGenre}) => {
     return (
-        <div
+        <button
+            onClick={() => {
+                if (onSelectGenre) {
+                    onSelectGenre(genre.id)
+                }
+            }}
             style={{
                 padding: "8px 12px",
                 borderRadius: "8px",
@@ -18,7 +24,7 @@ const GenresListComponent: FC<GenresListComponentProps> = ({ genre }) => {
             }}
         >
             {genre.name}
-        </div>
+        </button>
     );
 };
 

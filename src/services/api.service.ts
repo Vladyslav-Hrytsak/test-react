@@ -1,6 +1,7 @@
 import axios from "axios";
-import type {IMovie} from "../models/IMoviesResponceModel.ts";
 import type {IGenre} from "../models/IGenre.ts";
+import type {IMoviesResponseModel} from "../models/IMoviesResponceModel.ts";
+import type {IMovie} from "../models/IMovie.ts";
 
 
 const axiosInstance = axios.create({
@@ -11,15 +12,28 @@ const axiosInstance = axios.create({
 });
 
 
-export const getMovies = async (endpoint:string): Promise<IMovie[]> => {
-    const {data} = await axiosInstance.get(endpoint)
-    return data.results
-}
+export const getMovies = async (page: number): Promise<IMoviesResponseModel> => {
+    const { data } = await axiosInstance.get(`/discover/movie?page=${page}`);
+    return data;
+};
 
-// export const getMoviesByPage = async (endpoint:string): Promise<IMovie[]> => {
-//     const {data} = await axiosInstance.get(endpoint)
-//     return data.results
-// }
+export const getSearchMoviesList = async (query: string): Promise<IMoviesResponseModel> => {
+    const { data } = await axiosInstance.get(`/search/movie?query=${encodeURIComponent(query)}&language=ru-RU&page=1&include_adult=false`);
+    return data;
+};
+
+
+export const getMovieById = async (id: number): Promise<IMovie> => {
+    const { data } = await axiosInstance.get(`/movie/${id}`);
+    return data;
+};
+
+
+
+export const getMoviesByGenres = async (page: number, genre:number): Promise<IMoviesResponseModel> => {
+    const { data } = await axiosInstance.get(`/discover/movie?page=${page}&with_genres=${genre}`);
+    return data;
+};
 
 
 export const getGenres = async (endpoint: string): Promise<IGenre[]> => {

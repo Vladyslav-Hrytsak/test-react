@@ -1,30 +1,21 @@
-import {useSearchParams} from "react-router";
+interface Props {
+    page: number;
+    nextPage: () => void;
+    prevPage: () => void;
+}
 
-const PaginationComponent = () => {
-
-    const [query, setQuery] = useSearchParams({pg:'1'})
-
-
+const PaginationComponent = ({ page, nextPage, prevPage }: Props) => {
     return (
-        <div>
+        <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
+            <button onClick={prevPage} disabled={page === 1}>
+                PREV
+            </button>
 
-            <button onClick={()=>{
-                const pg = query.get('pg')
-                if(pg){
-                    let currentPage = +pg
-                    setQuery({pg:(++currentPage).toString()})
-                }
-            }}>PREV</button>
+            <span>Page: {page}</span>
 
-            <button onClick={()=>{
-                const pg = query.get('pg')
-                if(pg){
-                    let currentPage = +pg
-                    setQuery({pg:(--currentPage).toString()})
-                }
-            }} >NEXT</button>
-
-
+            <button onClick={nextPage}>
+                NEXT
+            </button>
         </div>
     );
 };
