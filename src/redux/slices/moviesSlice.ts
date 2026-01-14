@@ -1,11 +1,11 @@
-import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { IMoviesResponseModel } from "../../models/IMoviesResponceModel.ts";
 import { getMovieById, getMovies, getMoviesByGenres, getSearchMoviesList } from "../../services/api.service.ts";
 import type { IMovie } from "../../models/IMovie.ts";
 
 type MoviesSliceType = {
     movies: IMovie[];
-    searchResults: IMovie[];  // новое состояние для поиска
+    searchResults: IMovie[];
     movie: IMovie | null;
     page: number;
     totalPages: number;
@@ -21,37 +21,38 @@ const initialState: MoviesSliceType = {
     isLoading: false,
 };
 
-// thunk для поиска фильмов
-export const searchMovies = createAsyncThunk(
+
+
+export const searchMovies = createAsyncThunk<IMovie[], string>(
     "moviesSlice/searchMovies",
-    async (query: string, thunkAPI) => {
+    async (query, thunkAPI) => {
         try {
             const data = await getSearchMoviesList(query);
-            return thunkAPI.fulfillWithValue(data.results);
+            return data.results;
         } catch (e) {
             return thunkAPI.rejectWithValue(e);
         }
     }
 );
 
-export const loadMovies = createAsyncThunk(
+export const loadMovies = createAsyncThunk<IMoviesResponseModel, number>(
     "moviesSlice/loadMovies",
-    async (page: number, thunkAPI) => {
+    async (page, thunkAPI) => {
         try {
             const data = await getMovies(page);
-            return thunkAPI.fulfillWithValue(data);
+            return data;
         } catch (e) {
             return thunkAPI.rejectWithValue(e);
         }
     }
 );
 
-export const loadMovieById = createAsyncThunk(
+export const loadMovieById = createAsyncThunk<IMovie, number>(
     "moviesSlice/loadMovieById",
-    async (id: number, thunkAPI) => {
+    async (id, thunkAPI) => {
         try {
             const data = await getMovieById(id);
-            return thunkAPI.fulfillWithValue(data);
+            return data;
         } catch (e: any) {
             return thunkAPI.rejectWithValue({
                 message: e.message,
@@ -61,18 +62,19 @@ export const loadMovieById = createAsyncThunk(
     }
 );
 
-export const loadMoviesByGenre = createAsyncThunk(
+export const loadMoviesByGenre = createAsyncThunk<IMoviesResponseModel, { page: number; genreId: number }>(
     "moviesSlice/loadMoviesByGenre",
-    async ({ page, genreId }: { page: number; genreId: number }, thunkAPI) => {
+    async ({ page, genreId }, thunkAPI) => {
         try {
             const data = await getMoviesByGenres(page, genreId);
-            return thunkAPI.fulfillWithValue(data);
-        }
-        catch (e) {
+            return data;
+        } catch (e) {
             return thunkAPI.rejectWithValue(e);
         }
     }
 );
+
+
 
 export const moviesSlice = createSlice({
     name: "moviesSlice",
@@ -84,40 +86,52 @@ export const moviesSlice = createSlice({
     },
     extraReducers: builder => {
         builder
-            .addCase(loadMovies.pending, (state) => { state.isLoading = true; })
-            .addCase(loadMovies.fulfilled, (state, action: PayloadAction<IMoviesResponseModel>) => {
+            // ---- LOAD MOVIES ----
+            .addCase(loadMovies.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(loadMovies.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.movies = action.payload.results;
                 state.page = action.payload.page;
                 state.totalPages = action.payload.total_pages;
+                state.searchResults = []; // 🔥 сбрасываем поиск
             })
-            .addCase(loadMovies.rejected, (state) => { state.isLoading = false; })
+            .addCase(loadMovies.rejected, (state) => {
+                state.isLoading = false;
+            })
 
-            .addCase(loadMoviesByGenre.pending, (state) => { state.isLoading = true; })
-            .addCase(loadMoviesByGenre.fulfilled, (state, action: PayloadAction<IMoviesResponseModel>) => {
+            .addCase(loadMoviesByGenre.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(loadMoviesByGenre.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.movies = action.payload.results;
                 state.page = action.payload.page;
                 state.totalPages = action.payload.total_pages;
+                state.searchResults = []; // 🔥 сбрасываем поиск
             })
-            .addCase(loadMoviesByGenre.rejected, (state) => { state.isLoading = false; })
+            .addCase(loadMoviesByGenre.rejected, (state) => {
+                state.isLoading = false;
+            })
 
-            .addCase(loadMovieById.fulfilled, (state, action: PayloadAction<IMovie>) => {
+            .addCase(loadMovieById.fulfilled, (state, action) => {
                 state.movie = action.payload;
             })
-            .addCase(loadMovieById.rejected, (state, action) => {
-                console.log(state);
-                console.log(action);
-            })
 
-            .addCase(searchMovies.pending, (state) => { state.isLoading = true; })
-            .addCase(searchMovies.fulfilled, (state, action: PayloadAction<IMovie[]>) => {
+            .addCase(searchMovies.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(searchMovies.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.searchResults = action.payload;
             })
-            .addCase(searchMovies.rejected, (state) => { state.isLoading = false; });
+            .addCase(searchMovies.rejected, (state) => {
+                state.isLoading = false;
+            });
     }
 });
+
 
 export const moviesSliceActions = {
     ...moviesSlice.actions,

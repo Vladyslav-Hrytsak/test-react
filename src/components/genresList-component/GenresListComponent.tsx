@@ -13,16 +13,7 @@ const GenresListComponent: FC<GenresListComponentProps> = ({genre, onSelectGenre
                 if (onSelectGenre) {
                     onSelectGenre(genre.id)
                 }
-            }}
-            style={{
-                padding: "8px 12px",
-                borderRadius: "8px",
-                background: "#fff",
-                cursor: "pointer",
-                fontSize: "14px",
-                transition: "0.2s",
-            }}
-        >
+            }}>
             {genre.name}
         </button>
     );

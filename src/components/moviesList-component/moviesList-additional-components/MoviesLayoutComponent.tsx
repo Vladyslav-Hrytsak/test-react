@@ -1,7 +1,8 @@
 import SidebarGenresComponent from "./SidebarGenresComponent";
 import MoviesGridComponent from "./MoviesGridComponent";
-import type {IMovie} from "../../../models/IMoviesResponceModel.ts";
+import type {IMovie} from "../../../models/IMovie.ts";
 import type {IGenre} from "../../../models/IGenre.ts";
+
 
 
 interface Props {
@@ -17,7 +18,7 @@ const MoviesLayoutComponent = ({movies, genres, isSidebarOpen, setIsSidebarOpen,
         <div className="content">
             <SidebarGenresComponent genres={genres} isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} onSelectGenre={onSelectGenre}/>
 
-            <MoviesGridComponent movies={movies} />
+            <MoviesGridComponent movies={movies}/>
         </div>
     );
 };
