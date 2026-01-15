@@ -40,7 +40,7 @@ const SidebarGenresComponent = ({genres, isSidebarOpen, setIsSidebarOpen, onSele
                     />
                 ))}
 
-                <button onClick={handleBackToAllFilms}>
+                <button onClick={handleBackToAllFilms} className="closeBtn">
                     Back to all films
                 </button>
             </div>

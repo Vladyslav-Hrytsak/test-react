@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { moviesSliceActions } from "../../../redux/slices/moviesSlice.ts";
 import {useAppDispatch} from "../../../redux/hooks/useAppDispatch.ts";
-// import {useAppSelector} from "../../../redux/hooks/useAppSelector.ts";
 import {getSearchMoviesList} from "../../../services/api.service.ts";
 import type {IMovie} from "../../../models/IMovie.ts";
 import {useNavigate} from "react-router";
 import SuggestionsComponent from "./suggestions-component/SuggestionsComponent.tsx";
+
+import './SearchComponent.css'
 
 interface IFormData {
     title: string;
@@ -52,7 +53,7 @@ function SearchComponent() {
     };
 
     return (
-        <div style={{ position: "relative", width: "300px" }}>
+        <div className="search">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <input type="text"  placeholder="Search film..."{...register("title")} autoComplete="off"/>
                 <button type="submit">Search</button>

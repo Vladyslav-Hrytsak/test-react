@@ -3,6 +3,7 @@
     margin: 0 auto;
     padding: 100px 0;
 
+
 }
 
 .content{
@@ -15,7 +16,8 @@
 .sidebar {
     width: 220px;
     min-width: 220px;
-    background: #f7f7f7;
+    background: #c7cbd8;
+    border: 1px solid #3c3b3b;
     border-radius: 12px;
     padding: 15px;
     transition: all 0.3s ease;
@@ -79,4 +81,8 @@
     width: 100%;
 }
 
-
+.closeBtn{
+    padding: 13px;
+    background: #8e8686;
+    color: #fff;
+}
