@@ -1,6 +1,7 @@
 import './HeaderComponent.css'
 import SearchComponent from "./search-component/SearchComponent.tsx";
 import GoHomeComponent from "./GoHomeComponent.tsx";
+import UserInfoComponent from "./user-info/UserInfoComponent.tsx";
 
 
 const HeaderComponent = () => {
@@ -9,6 +10,7 @@ const HeaderComponent = () => {
             <div className= 'header'>
                 <GoHomeComponent/>
                 <SearchComponent/>
+                <UserInfoComponent/>
             </div>
         </div>
     );

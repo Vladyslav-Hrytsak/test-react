@@ -1,0 +1,10 @@
+.user-info{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-info img{
+    margin-left: 10px;
+    max-width: 40px;
+}
