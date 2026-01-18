@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { moviesSliceActions } from "../../../redux/slices/moviesSlice.ts";
+import { moviesSliceActions } from "../../../redux/slices/movies-slice/moviesSlice.ts";
 import {useAppDispatch} from "../../../redux/hooks/useAppDispatch.ts";
 import {getSearchMoviesList} from "../../../services/api.service.ts";
-import type {IMovie} from "../../../models/IMovie.ts";
 import {useNavigate} from "react-router";
 import SuggestionsComponent from "./suggestions-component/SuggestionsComponent.tsx";
 
 import './SearchComponent.css'
+import type {IMovieShort} from "../../../models/IMovieShort.ts";
 
 interface IFormData {
     title: string;
@@ -17,9 +17,8 @@ function SearchComponent() {
     const { register, handleSubmit, watch } = useForm<IFormData>();
 
     const dispatch = useAppDispatch();
-    // const searchResults = useAppSelector(state => state.moviesSlice.searchResults);
 
-    const [suggestions, setSuggestions] = useState<IMovie[]>([]);
+    const [suggestions, setSuggestions] = useState<IMovieShort[]>([]);
 
     const query = watch("title");
 

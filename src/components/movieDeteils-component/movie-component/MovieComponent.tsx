@@ -12,7 +12,6 @@ const MovieComponent: FC<MovieDetailsComponentProps> = ({ movie }) => {
     return (
         <div className="movie-details">
 
-            {/* Backdrop */}
             <div
                 className="backdrop"
                 style={{
@@ -24,7 +23,6 @@ const MovieComponent: FC<MovieDetailsComponentProps> = ({ movie }) => {
 
             <div className="movie-content">
 
-                {/* Poster */}
                 <div className="poster">
                     <img
                         src={`${IMAGE_BASE_URL}${movie.poster_path}`}
@@ -32,7 +30,6 @@ const MovieComponent: FC<MovieDetailsComponentProps> = ({ movie }) => {
                     />
                 </div>
 
-                {/* Info */}
                 <div className="info">
 
                     <h1 className="title">
@@ -59,13 +56,11 @@ const MovieComponent: FC<MovieDetailsComponentProps> = ({ movie }) => {
                         ))}
                     </div>
 
-                    {/* Overview */}
                     <div className="overview">
                         <h3>Overview</h3>
                         <p>{movie.overview}</p>
                     </div>
 
-                    {/* Additional Info */}
                     <div className="additional-info">
 
                         <div>
@@ -93,7 +88,6 @@ const MovieComponent: FC<MovieDetailsComponentProps> = ({ movie }) => {
                         </div>
                     </div>
 
-                    {/* Production Companies */}
                     <div className="companies">
                         <h3>Production Companies</h3>
                         <ul>
@@ -105,7 +99,6 @@ const MovieComponent: FC<MovieDetailsComponentProps> = ({ movie }) => {
                         </ul>
                     </div>
 
-                    {/* Spoken Languages */}
                     <div className="languages">
                         <h3>Spoken Languages</h3>
                         <ul>

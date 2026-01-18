@@ -22,7 +22,6 @@ const loadGenres = createAsyncThunk(
 )
 
 
-
 const initialState:GenresSlice = {genres:[]};
 
 export const genresSlice = createSlice({

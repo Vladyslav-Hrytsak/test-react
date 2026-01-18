@@ -1,7 +1,7 @@
 import {useAppDispatch} from "../../redux/hooks/useAppDispatch.ts";
 import {useAppSelector} from "../../redux/hooks/useAppSelector.ts";
 import {useParams} from "react-router";
-import {moviesSliceActions} from "../../redux/slices/moviesSlice.ts";
+import {moviesSliceActions} from "../../redux/slices/movies-slice/moviesSlice.ts";
 import {useEffect} from "react";
 import MovieComponent from "./movie-component/MovieComponent.tsx";
 

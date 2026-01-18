@@ -12,54 +12,28 @@ const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w300";
 
 const MovieCardComponent: FC<MovieCardComponentProps> = ({ movie }) => {
     return (
-        <Link to={`/movies/${movie.id}`} className={"card"}>
-            <div
-                style={{
-                    border: "1px solid #ddd",
-                    padding: "10px",
-                    width: "250px",
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                }}
-            >
+        <Link to={`/movies/${movie.id}`} className="movie-card">
+            <div className="movie-card__container">
                 <img
                     src={`${IMAGE_BASE_URL}${movie.poster_path}`}
                     alt={movie.title}
-                    style={{ width: "100%", borderRadius: "6px" }}
-                />
+                    className="movie-card__poster"/>
 
-                <h3>{movie.title}</h3>
+                <h3 className="movie-card__title">{movie.title}</h3>
 
-                <div style={{ fontSize: "12px", color: "gray" }}>
-                    {movie.original_title}
-                </div>
+                <div className="movie-card__original-title">{movie.original_title}</div>
 
                 <StarsRatingComponent rating={movie.vote_average} />
 
-                <div style={{ fontSize: "12px", color: "gray" }}>
-                    {movie.vote_average} / 10
-                </div>
+                <div className="movie-card__rating">{movie.vote_average} / 10</div>
 
-                <div style={{ fontSize: "12px", color: "gray" }}>
-                    Release: {movie.release_date}
-                </div>
+                <div className="movie-card__release">Release: {movie.release_date}</div>
 
-                <p style={{ fontSize: "14px" }}>{movie.overview}</p>
+                <p className="movie-card__overview">{movie.overview}</p>
 
-                {/* жанры — только ID */}
-                <div>
+                <div className="movie-card__genres">
                     {movie.genre_ids?.map((id) => (
-                        <span
-                            key={id}
-                            style={{
-                                fontSize: "12px",
-                                padding: "2px 6px",
-                                border: "1px solid #ccc",
-                                borderRadius: "10px",
-                                marginRight: "5px",
-                            }}
-                        >
+                        <span key={id} className="movie-card__genre">
                             #{id}
                         </span>
                     ))}

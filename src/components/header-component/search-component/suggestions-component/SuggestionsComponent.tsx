@@ -1,29 +1,20 @@
-import type { IMovie } from "../../../../models/IMovie.ts";
+import type { IMovieShort } from "../../../../models/IMovieShort.ts";
+import './SuggestionsComponent.css';
 
 interface SuggestionsComponentProps {
-    suggestions: IMovie[];
+    suggestions: IMovieShort[];
     onSelect: (title: string) => void;
 }
 
 const SuggestionsComponent = ({ suggestions, onSelect }: SuggestionsComponentProps) => {
     return (
-        <ul
-            style={{
-                position: "absolute",
-                top: "40px",
-                left: 0,
-                width: "100%",
-                background: "white",
-                border: "1px solid #ccc",
-                listStyle: "none",
-                padding: "5px",
-                margin: 0,
-                zIndex: 10
-            }}
-        >
+        <ul className="suggestions-list">
             {suggestions.map((movie) => (
-                <li key={movie.id} style={{ padding: "5px 0", cursor: "pointer" }}
-                    onClick={() => onSelect(movie.title)}>
+                <li
+                    key={movie.id}
+                    className="suggestion-item"
+                    onClick={() => onSelect(movie.title)}
+                >
                     {movie.title}
                 </li>
             ))}

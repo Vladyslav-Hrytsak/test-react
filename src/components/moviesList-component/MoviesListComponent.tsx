@@ -1,6 +1,6 @@
 import { useAppDispatch } from "../../redux/hooks/useAppDispatch";
 import { useEffect, useState } from "react";
-import { moviesSliceActions } from "../../redux/slices/moviesSlice";
+import { moviesSliceActions } from "../../redux/slices/movies-slice/moviesSlice.ts";
 import { useAppSelector } from "../../redux/hooks/useAppSelector";
 import { genresSliceActions } from "../../redux/slices/genresSlice";
 import { useSearchParams } from "react-router-dom";
@@ -23,7 +23,7 @@ const MoviesListComponent = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     useEffect(() => {
-        if (!searchResults.length) { // если есть searchResults, не грузим обычные фильмы
+        if (!searchResults.length) {
             if (genreId) {
                 dispatch(moviesSliceActions.loadMoviesByGenre({ page, genreId: Number(genreId) }));
             } else {
@@ -77,15 +77,13 @@ const MoviesListComponent = () => {
                 genres={genres}
                 isSidebarOpen={isSidebarOpen}
                 setIsSidebarOpen={setIsSidebarOpen}
-                onSelectGenre={selectGenre}
-            />
+                onSelectGenre={selectGenre}/>
 
             {!searchResults.length && (
                 <PaginationComponent
                     page={page}
                     nextPage={nextPage}
-                    prevPage={prevPage}
-                />
+                    prevPage={prevPage}/>
             )}
         </div>
     );

@@ -1,3 +1,6 @@
+import './PaginationComponent.css'
+
+
 interface Props {
     page: number;
     nextPage: () => void;
@@ -6,7 +9,7 @@ interface Props {
 
 const PaginationComponent = ({ page, nextPage, prevPage }: Props) => {
     return (
-        <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
+        <div className="pagination-div">
             <button onClick={prevPage} disabled={page === 1}>
                 PREV
             </button>

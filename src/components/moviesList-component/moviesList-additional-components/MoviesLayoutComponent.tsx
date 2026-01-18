@@ -1,12 +1,12 @@
 import SidebarGenresComponent from "./SidebarGenresComponent";
 import MoviesGridComponent from "./MoviesGridComponent";
-import type {IMovie} from "../../../models/IMovie.ts";
 import type {IGenre} from "../../../models/IGenre.ts";
+import type {IMovieShort} from "../../../models/IMovieShort.ts";
 
 
 
 interface Props {
-    movies: IMovie[],
+    movies: IMovieShort[],
     genres: IGenre[],
     isSidebarOpen: boolean,
     setIsSidebarOpen: (value: boolean) => void,

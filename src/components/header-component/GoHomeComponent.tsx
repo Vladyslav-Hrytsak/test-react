@@ -1,7 +1,7 @@
 import {useNavigate} from "react-router";
 import {useAppSelector} from "../../redux/hooks/useAppSelector.ts";
 import {useAppDispatch} from "../../redux/hooks/useAppDispatch.ts";
-import {moviesSliceActions} from "../../redux/slices/moviesSlice.ts";
+import {moviesSliceActions} from "../../redux/slices/movies-slice/moviesSlice.ts";
 
 const GoHomeComponent = () => {
 
@@ -21,7 +21,7 @@ const GoHomeComponent = () => {
             <button onClick={
                 onClick
             }>
-                ⮐ BACK
+                🏠  BACK
             </button>
         </div>
     );

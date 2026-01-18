@@ -1,5 +1,6 @@
 import type {IGenre} from "../../models/IGenre";
 import type {FC} from "react";
+import './GenresListComponent.css'
 
 interface GenresListComponentProps {
     genre: IGenre,

@@ -1,8 +1,8 @@
-import type {IMovie} from "../../../models/IMoviesResponceModel.ts";
 import MovieCardComponent from "../../movieCard-component/MovieCardComponent.tsx";
+import type {IMovieShort} from "../../../models/IMovieShort.ts";
 
 interface Props {
-    movies: IMovie[],
+    movies: IMovieShort[],
 }
 
 const MoviesGridComponent = ({movies}: Props) => {
